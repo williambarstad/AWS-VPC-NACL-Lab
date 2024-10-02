@@ -73,9 +73,7 @@ resource "aws_subnet" "public_subnet_az1" {
   availability_zone       = var.azone1
   map_public_ip_on_launch = true
   tags = {
-    Name                                      = "${var.env}-public-${var.azone1}"
-    "kubernetes.io/cluster/${var.eks_name}" = "owned"
-    "kubernetes.io/role/elb"                  = "1"
+    Name = "${var.env}-public-${var.azone1}"
   }
 }
 
@@ -85,9 +83,7 @@ resource "aws_subnet" "private_subnet_az1" {
   cidr_block        = var.private_subnet_cidr_az1
   availability_zone = var.azone1
   tags = {
-    Name                                      = "${var.env}-private-${var.azone1}"
-    "kubernetes.io/cluster/${var.eks_name}" = "owned"
-    "kubernetes.io/role/internal-elb"         = "1"
+    Name = "${var.env}-private-${var.azone1}"
   }
 }
 
@@ -128,8 +124,8 @@ resource "aws_route_table_association" "private_azone1" {
 
 # Create Public NACL
 resource "aws_network_acl" "public_nacl" {
-  vpc_id = data.aws_vpc.my_vpc.id
-  subnet_ids = [data.aws_subnet.public_subnet.id]
+  vpc_id = aws_vpc.main.id
+  subnet_ids = [aws_subnet.public_subnet_az1.id]
 
   tags = {
     Name = "Public NACL"
@@ -161,8 +157,8 @@ resource "aws_network_acl_rule" "allow_all_outbound_public" {
 
 # Create Private NACL
 resource "aws_network_acl" "private_nacl" {
-  vpc_id = data.aws_vpc.my_vpc.id
-  subnet_ids = [data.aws_subnet.private_subnet.id]
+  vpc_id = aws_vpc.main.id
+  subnet_ids = [aws_subnet.private_subnet_az1.id]
 
   tags = {
     Name = "Private NACL"
@@ -194,12 +190,13 @@ resource "aws_network_acl_rule" "allow_outbound_private" {
 
 # Associate Public NACL with Public Route Table
 resource "aws_route_table_association" "public_nacl_association" {
-  subnet_id      = data.aws_subnet.public_subnet.id
-  route_table_id = data.aws_route_table.public_route_table.id
+  subnet_id      = aws_subnet.public_subnet_az1.id
+  route_table_id = aws_route_table.public_rt.id
 }
 
 # Associate Private NACL with Private Route Table
 resource "aws_route_table_association" "private_nacl_association" {
-  subnet_id      = data.aws_subnet.private_subnet.id
-  route_table_id = data.aws_route_table.private_route_table.id
+  subnet_id      = aws_subnet.private_subnet_az1.id
+  route_table_id = aws_route_table.private_rt.id
 }
+
