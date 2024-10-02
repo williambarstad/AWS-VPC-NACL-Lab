@@ -1,0 +1,6 @@
+/.terraform
+/.terraform.lock.hcl
+/AWS-VPC-NACL-Lab.code-workspace
+/aws-vpc-nacl-lab.drawio
+/aws-vpc-nacl-lab.svg
+/scratch.txt
