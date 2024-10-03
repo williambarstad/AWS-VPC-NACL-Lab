@@ -1,8 +1,11 @@
-output "vpc_id" {
-  value = aws_vpc.main.id
+output "public-instance-ip" {
+  value = aws_instance.public_ec2.public_ip
 }
 
-output "private_subnet_ids" {
-  value       = aws_subnet.private_subnet_az1.id
-  description = "Private subnet IDs used for the EKS cluster."
+output "private-instance-ip" {
+  value = aws_instance.private_ec2.private_ip
+}
+
+output "vpc_id" {
+  value = aws_vpc.main.id
 }

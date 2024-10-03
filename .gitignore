@@ -5,3 +5,11 @@
 /aws-vpc-nacl-lab.svg
 /scratch.txt
 terraform.tfstate
+scratch.md
+terraform.tfvars
+terraform.tfstate.backup
+.infracost/pricing.gob
+.infracost/terraform_modules/manifest.json
+.terraform.tfstate.lock.info
+.gitignore
+nacl-lab.zip

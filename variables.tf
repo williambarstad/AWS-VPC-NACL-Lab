@@ -23,14 +23,19 @@ variable "azone1" {
   default     = "us-west-2a"
 }
 
-variable "azone2" {
-  description = "The second availability zone"
-  default     = "us-west-2b"
+variable "ami_name" {
+  description = "The name of the AMI to use for the instances"
+  default     = "al2023-ami-2023.5.20240916.0-kernel-6.1-x86_64"
 }
 
-variable "ami_name" {
-  description = "The name of the AMI to use for the EKS nodes"
-  default     = "al2023-ami-2023.5.20240903.0-kernel-6.1-x86_64"
+variable "ami" {
+  description = "The ID of the AMI to use for the instances"
+  default     = "ami-08d8ac128e0a1b91c"
+}
+
+variable "wjb_ami_instance_profile" {
+  description = "The name of the instance profile for the AMI"
+  default     = "wjb-ssm-ec2-role"
 }
 
 variable "vpc_cidr" {
@@ -49,17 +54,17 @@ variable "private_subnet_cidr_az1" {
   default     = "10.0.2.0/24"
 }
 
-variable "public_subnet_cidr_az2" {
-  description = "CIDR block for the public subnet in availability zone 2"
-  default     = "10.0.3.0/24"
-}
-
-variable "private_subnet_cidr_az2" {
-  description = "CIDR block for the private subnet in availability zone 2"
-  default     = "10.0.4.0/24"
-}
-
 variable "key_name" {
   description = "The name of the SSH key to use for the EKS nodes"
-  default     = "wjb-key-0001"
+  default     = ""
+}
+
+variable "capacity_type" {
+  description = "The capacity type for the EKS nodes"
+  default     = "ON_DEMAND"
+}
+
+variable "instance_type" {
+  description = "The instance type for the EKS nodes"
+  default     = "t3.medium"
 }
