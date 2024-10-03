@@ -1,32 +1,20 @@
-# AWS-VPC-NACL-Lab (WIP)
-
+# AWS-VPC-NACL-Lab (work in progress)
 
 ![AWS-VPC-NACL](aws-vpc-nacl-lab.png)
 
 ---
-
-## Overview
-
-This project allows you to quickly set up a Kubernetes cluster on AWS EKS using Terraform. It's designed to create resources in a modular, scalable way for testing and development purposes.
-
----
-
-## Prerequisites
-
-* Install **Terraform** and **Kubectl** on your var machine.
-* Set up **AWS CLI** and configure your credentials:
-  - Ensure you have `~/.aws/config` and `~/.aws/credentials` files set up properly.
-  - You'll need an AWS account and an IAM user with sufficient permissions to create resources like EKS clusters, subnets, and VPCs.
-
----
-
-# Cost Breakdown
-
-![Estimated Cost](aws-vpc-nacl-lab-cost.png)
-
 # AWS VPC with Public and Private EC2 Instances
 
 This project sets up an AWS Virtual Private Cloud (VPC) with both **public** and **private** EC2 instances. The public instance runs a basic Apache web server, while the private instance is designed to only be accessible from within the VPC, such as through ICMP (ping) from the public instance.
+
+
+## Overview
+This hopefully handy VPC-NACL lab sets up an environment where:
+* A public server is confiugred for HTTP and SSH ingress.
+* A private server can only recieve and reply to a ping to a server that is in the VPC.
+* Test by:
+  * Accessing the public web server through a browser
+  * SSH to the public server and ping the private server using the private IP address.
 
 ## Architecture Overview
 
@@ -95,6 +83,10 @@ This project provisions:
     ping <private-instance-ip>
     ```
 
+## Cost Breakdown
+
+![Estimated Cost](aws-vpc-nacl-lab-cost.png)
+
 ## Troubleshooting
 
 - If the web server is not accessible, ensure that:
@@ -112,18 +104,17 @@ To delete the resources created by Terraform, run:
 
 ```bash
 terraform destroy
+```
+
 This will remove all provisioned infrastructure, including the VPC, EC2 instances, and network configurations.
 
-Future Enhancements
-Add autoscaling for the public instance.
-Implement NAT Gateway for the private subnet to allow internet access for the private EC2 instance.
-Use Amazon RDS in the private subnet for database hosting.
-License
-This project is licensed under the MIT License - see the LICENSE file for details.
+## Future Enhancements
+* Add autoscaling for the public instance.
+* Implement NAT Gateway for the private subnet to allow internet access for the private EC2 instance.
+* Use Amazon RDS in the private subnet for database hosting.
 
-Developed by Your Name
+## License
+This project is licensed under the MIT License.
 
-vbnet
-Copy code
+Developed by [William Barstad](http://williambarstad.com)
 
-This `README.md` file includes essential information like project setup, architecture overview, usage, and troubleshooti

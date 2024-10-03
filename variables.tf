@@ -30,12 +30,12 @@ variable "ami_name" {
 
 variable "ami" {
   description = "The ID of the AMI to use for the instances"
-  default     = "ami-08d8ac128e0a1b91c"
+  default     = ""
 }
 
 variable "wjb_ami_instance_profile" {
   description = "The name of the instance profile for the AMI"
-  default     = "wjb-ssm-ec2-role"
+  default     = ""
 }
 
 variable "vpc_cidr" {
